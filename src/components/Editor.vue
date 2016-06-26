@@ -2,7 +2,7 @@
   <div id="note-editor">
     <textarea 
       :value="activeNoteText"
-      @input="editNote"
+      @input="updateMessage"
       class="form-control"></textarea>
   </div>
 </template>
@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     updateMessage(e) {
-      editNote(e.target.value);
+      this.editNote(e.target.value);
     }
   }
 }

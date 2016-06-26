@@ -64,7 +64,7 @@ export default {
   methods: {
     toggleShow(show) {
       this.show = show;
-      // TODO, updateActiveNote
+      this.updateActiveNote(this.filteredNotes[0]);
     }
   }
 }
