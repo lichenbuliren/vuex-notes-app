@@ -12,15 +12,7 @@ const router = new VueRouter();
 
 router.map({
   '/index': {
-    component: Home
-  },
-  'time-entries': {
-    component: TimeEntries,
-    subRoutes: {
-      '/log-time': {
-        component: LogTime
-      }
-    }
+    component: App
   }
 });
 
