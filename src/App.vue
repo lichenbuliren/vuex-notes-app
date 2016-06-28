@@ -7,8 +7,6 @@
 </template>
 
 <style>
-  @import url(https://fonts.googleapis.com/css?family=Raleway:400,300);
-
   html, #app {
     height: 100%;
   }
@@ -28,6 +26,7 @@
   import NotesList from './components/NotesList';
   import Editor from './components/Editor';
   import store from './vuex/store';
+  import { initStore } from './vuex/actions';
 
   export default {
     components: {
@@ -35,6 +34,14 @@
       NotesList,
       Editor
     },
-    store
+    store,
+    vuex: {
+      actions: {
+        initStore
+      }
+    },
+    created() {
+      this.initStore()
+    }
   }
 </script>

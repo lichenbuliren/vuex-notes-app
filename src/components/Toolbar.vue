@@ -1,13 +1,13 @@
 <template>
   <div id="toolbar">
-    <i @click="addNote" class="glyphicon glyphicon-plus"></i>
+    <i @click="newNote" class="glyphicon glyphicon-plus"></i>
     <i @click="toggleFavorite" class="glyphicon glyphicon-star" :class="{starred: activeNote.favorite}"></i>
     <i @click="deleteNote" class="glyphicon glyphicon-remove"></i>
   </div>
 </template>
 
 <script>
-import { addNote, deleteNote, toggleFavorite } from '../vuex/actions';
+import { newNote, deleteNote, toggleFavorite } from '../vuex/actions';
 
 export default {
   vuex: {
@@ -15,7 +15,7 @@ export default {
       activeNote: state => state.activeNote
     },
     actions: {
-      addNote,
+      newNote,
       deleteNote,
       toggleFavorite
     }

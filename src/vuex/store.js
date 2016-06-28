@@ -4,28 +4,43 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 const note = {
-  text: '案例笔记',
+  id: +new Date(),
+  title: 'default title',
+  content: 'default content',
   favorite: false
 };
 
 const state = {
-  notes: [note],
-  activeNote: note,
-  // 1 表示全部，0表示favorite
-  showAll: 1
+  notes: [],
+  activeNote: {},
+  show: ''
 };
 
 const mutations = {
-  ADD_NOTE(state) {
+  INIT_STORE(state, data) {
+    state.notes = data.notes,
+    state.show = data.show;
+    state.activeNote = data.activeNote;
+  },
+  NEW_NOTE(state) {
     var newNote = {
-      text: 'New note',
+      id: +new Date(),
+      title: '请输入标题',
+      content: '请输入内容',
       favorite: false
     };
     state.notes.push(newNote);
     state.activeNote = newNote;
   },
-  EDIT_NOTE(state, text) {
-    state.activeNote.text = text;
+  EDIT_NOTE(state, note) {
+    state.activeNote = note;
+    state.show = 'all';
+    for (var i = 0; i < state.notes.length; i++) {
+      if(state.notes[i].id === note.id){
+        state.notes[i] = note;
+        break;
+      }
+    }
   },
   DELETE_NOTE(state) {
     state.notes.$remove(state.activeNote);
@@ -34,10 +49,10 @@ const mutations = {
   TOGGLE_FAVORITE(state) {
     state.activeNote.favorite = !state.activeNote.favorite;
   },
-  SET_SHOW_ALL(state, showAll){
-    state.showAll = showAll;
+  SET_SHOW_ALL(state, show){
+    state.show = show;
     // 过滤数据
-    if(!showAll){
+    if(show === 'favorite'){
       state.activeNote = state.notes.filter(note => note.favorite)[0] || {};
     }else{
       state.activeNote = state.notes[0] || {};

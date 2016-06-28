@@ -6,15 +6,15 @@
         <!-- all -->
         <div class="btn-group" role="group">
           <button type="button" class="btn btn-default"
-            @click="toggleShow(1)"
-            :class="{active: this.showAll === 1}">All Notes</button>
+            @click="toggleShow('all')"
+            :class="{active: show === 'all'}">All Notes</button>
         </div>
 
         <!-- favorites -->
         <div class="btn-group" role="group">
           <button type="button" class="btn btn-default"
-            @click="toggleShow(0)"
-            :class="{active: this.showAll === 0}">Favorites</button>
+            @click="toggleShow('favorite')"
+            :class="{active: show === 'favorite'}">Favorites</button>
         </div>
       </div>
     </div>
@@ -24,9 +24,10 @@
       <div class="list-group">
         <a v-for="note in filteredNotes"
          class="list-group-item" href="#"
+         :class="{active: activeNote === note}"
          @click="updateActiveNote(note)">
           <h4 class="list-group-item-heading">
-            {{note.text.trim().substring(0,30)}}
+            {{note.title.trim().substring(0,30)}}
           </h4>
         </a>
       </div>
@@ -35,32 +36,25 @@
 </template>
 
 <script>
-  import { updateActiveNote, updateShowAll } from '../vuex/actions';
+  import { updateActiveNote, updateShow } from '../vuex/actions';
+  import { filteredNotes } from '../vuex/getters';
 
   export default {
     vuex: {
       getters: {
-        showAll: state => state.showAll,
+        show: state => state.show,
         notes: state => state.notes,
-        activeNote: state => state.activeNote
+        activeNote: state => state.activeNote,
+        filteredNotes
       },
       actions: {
         updateActiveNote,
-        updateShowAll
-      }
-    },
-    computed: {
-      filteredNotes() {
-        if(this.showAll){
-          return this.notes;
-        }else{
-          return this.notes.filter(note => note.favorite);
-        }
+        updateShow
       }
     },
     methods: {
-      toggleShow(showAll) {
-        this.updateShowAll(showAll);
+      toggleShow(show) {
+        this.updateShow(show);
       }
     }
   }
