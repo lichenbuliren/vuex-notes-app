@@ -6,15 +6,15 @@
         <!-- all -->
         <div class="btn-group" role="group">
           <button type="button" class="btn btn-default"
-            @click="toggleShow('all')"
-            :class="{active: show === 'all'}">All Notes</button>
+            @click="toggleShow(1)"
+            :class="{active: this.showAll === 1}">All Notes</button>
         </div>
 
         <!-- favorites -->
         <div class="btn-group" role="group">
           <button type="button" class="btn btn-default"
-            @click="toggleShow('favorites')"
-            :class="{active: show === 'favorites'}">Favorites</button>
+            @click="toggleShow(0)"
+            :class="{active: this.showAll === 0}">Favorites</button>
         </div>
       </div>
     </div>
@@ -35,37 +35,74 @@
 </template>
 
 <script>
-import { updateActiveNote } from '../vuex/actions';
+  import { updateActiveNote, updateShowAll } from '../vuex/actions';
 
-export default {
-  data() {
-    return {
-      show: 'all'
-    }
-  },
-  vuex: {
-    getters: {
-      notes: state => state.notes,
-      activeNote: state => state.activeNote
+  export default {
+    vuex: {
+      getters: {
+        showAll: state => state.showAll,
+        notes: state => state.notes,
+        activeNote: state => state.activeNote
+      },
+      actions: {
+        updateActiveNote,
+        updateShowAll
+      }
     },
-    actions: {
-      updateActiveNote
-    }
-  },
-  computed: {
-    filteredNotes() {
-      if(this.show === 'all'){
-        return this.notes;
-      }else if(this.show === 'favorites'){
-        return this.notes.filter(note => note.favorite);
+    computed: {
+      filteredNotes() {
+        if(this.showAll){
+          return this.notes;
+        }else{
+          return this.notes.filter(note => note.favorite);
+        }
+      }
+    },
+    methods: {
+      toggleShow(showAll) {
+        this.updateShowAll(showAll);
       }
     }
-  },
-  methods: {
-    toggleShow(show) {
-      this.show = show;
-      this.updateActiveNote(this.filteredNotes[0]);
+  }
+</script>
+
+<style lang="scss" scoped>
+  #notes-list {
+    float: left;
+    width: 300px;
+    height: 100%;
+    background-color: #F5F5F5;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+
+    #list-header{
+      padding: 5px 25px 25px 25px;
+
+      h2{
+        font-weight: 300;
+        text-transform: uppercase;
+        text-align: center;
+        font-size: 22px;
+        padding-bottom: 8px;
+      }
+    }
+
+    .container{
+      height: calc(100% - 137px);
+      max-height: calc(100% - 137px);
+      overflow: auto;
+      width: 100%;
+      padding: 0;
+
+      .list-group-item{
+        border: 0;
+        border-radius: 0;
+
+        .list-group-item-heading{
+          font-weight: 300;
+          font-size: 15px;
+        }
+      }
     }
   }
-}
-</script>
+</style>
