@@ -2,12 +2,15 @@ function makeAction(type) {
   return ({ dispatch }, ...args) => dispatch(type, ...args);
 };
 
+
+// 模拟初始化数据
 const initNote = {
   id: +new Date(),
   title: '我的笔记',
   content: '第一篇笔记内容',
   favorite: false
-}
+};
+
 const initData = {
   show: 'all',
   notes: [initNote],

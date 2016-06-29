@@ -25,8 +25,8 @@ const mutations = {
   NEW_NOTE(state) {
     var newNote = {
       id: +new Date(),
-      title: '请输入标题',
-      content: '请输入内容',
+      title: '',
+      content: '',
       favorite: false
     };
     state.notes.push(newNote);
@@ -34,24 +34,24 @@ const mutations = {
   },
   EDIT_NOTE(state, note) {
     state.activeNote = note;
-    state.show = 'all';
+    // 修改原始数据
     for (var i = 0; i < state.notes.length; i++) {
       if(state.notes[i].id === note.id){
         state.notes[i] = note;
         break;
       }
-    }
+    };
   },
   DELETE_NOTE(state) {
     state.notes.$remove(state.activeNote);
-    state.activeNote = state.notes[0];
+    state.activeNote = state.notes[0] || {};
   },
   TOGGLE_FAVORITE(state) {
     state.activeNote.favorite = !state.activeNote.favorite;
   },
   SET_SHOW_ALL(state, show){
     state.show = show;
-    // 过滤数据
+    // 切换数据展示，需要同步更新 activeNote
     if(show === 'favorite'){
       state.activeNote = state.notes.filter(note => note.favorite)[0] || {};
     }else{

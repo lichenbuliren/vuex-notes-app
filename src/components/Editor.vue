@@ -8,29 +8,32 @@
         v-model="currentNote.title">
       <textarea
         v-model="currentNote.content" name="content"
-        class="form-control" row="3" placeholder="请输入正文"></textarea>
+        class="form-control" row="3" placeholder="请输入正文"
+        @input="updateNote"></textarea>
     </div>
   </div>
 </template>
 
 <script>
   import { editNote } from '../vuex/actions';
+  import { activeNote } from '../vuex/getters';
 
   export default {
     vuex: {
       getters: {
-        activeNote: state => state.activeNote
+        activeNote
       },
       actions: {
         editNote
       }
     },
     computed: {
-      currentNote: state => state.activeNote
+      // 通过计算属性得到的一个对象，这样子我们就能愉快的使用 v-model 了
+      currentNote: activeNote
     },
     methods: {
-      updateNote(e) {
-        console.log(this.currentNote);
+      // 为什么这么做？ 因为在严格模式中不允许直接在模板层面去修改 state 中的值
+      updateNote() {
         this.editNote(this.currentNote);
       }
     }

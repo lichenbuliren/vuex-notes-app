@@ -37,15 +37,14 @@
 
 <script>
   import { updateActiveNote, updateShow } from '../vuex/actions';
-  import { filteredNotes } from '../vuex/getters';
+  import { show, filteredNotes, activeNote } from '../vuex/getters';
 
   export default {
     vuex: {
       getters: {
-        show: state => state.show,
-        notes: state => state.notes,
-        activeNote: state => state.activeNote,
-        filteredNotes
+        show,
+        filteredNotes,
+        activeNote
       },
       actions: {
         updateActiveNote,
