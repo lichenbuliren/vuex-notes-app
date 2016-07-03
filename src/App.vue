@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="app">
     <toolbar></toolbar>
     <notes-list></notes-list>
     <editor></editor>
@@ -40,7 +40,7 @@
         initStore
       }
     },
-    created() {
+    ready() {
       this.initStore()
     }
   }

@@ -2,8 +2,6 @@ function makeAction(type) {
   return ({ dispatch }, ...args) => dispatch(type, ...args);
 };
 
-
-// 模拟初始化数据
 const initNote = {
   id: +new Date(),
   title: '我的笔记',
@@ -11,6 +9,7 @@ const initNote = {
   favorite: false
 };
 
+// 模拟初始化数据
 const initData = {
   show: 'all',
   notes: [initNote],

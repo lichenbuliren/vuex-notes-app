@@ -3,13 +3,7 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
-const note = {
-  id: +new Date(),
-  title: 'default title',
-  content: 'default content',
-  favorite: false
-};
-
+// 需要维护的状态
 const state = {
   notes: [],
   activeNote: {},
@@ -17,11 +11,13 @@ const state = {
 };
 
 const mutations = {
+  // 初始化 state
   INIT_STORE(state, data) {
     state.notes = data.notes,
     state.show = data.show;
     state.activeNote = data.activeNote;
   },
+  // 新增笔记
   NEW_NOTE(state) {
     var newNote = {
       id: +new Date(),
@@ -32,6 +28,7 @@ const mutations = {
     state.notes.push(newNote);
     state.activeNote = newNote;
   },
+  // 修改笔记
   EDIT_NOTE(state, note) {
     state.activeNote = note;
     // 修改原始数据
@@ -42,13 +39,16 @@ const mutations = {
       }
     };
   },
+  // 删除笔记
   DELETE_NOTE(state) {
     state.notes.$remove(state.activeNote);
     state.activeNote = state.notes[0] || {};
   },
+  // 切换笔记的收藏与取消收藏
   TOGGLE_FAVORITE(state) {
     state.activeNote.favorite = !state.activeNote.favorite;
   },
+  // 切换显示数据列表类型：全部 or 收藏
   SET_SHOW_ALL(state, show){
     state.show = show;
     // 切换数据展示，需要同步更新 activeNote
@@ -58,6 +58,7 @@ const mutations = {
       state.activeNote = state.notes[0] || {};
     }
   },
+  // 设置当前激活的笔记
   SET_ACTIVE_NOTE(state, note) {
     state.activeNote = note;
   }
