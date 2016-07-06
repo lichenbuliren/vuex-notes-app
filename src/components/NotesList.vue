@@ -17,12 +17,22 @@
             :class="{active: show === 'favorite'}">Favorites</button>
         </div>
       </div>
+
+      <div class="btn-group btn-group-justified" role="group">
+        <div class="input-group search">
+          <input type="text" class="form-control" v-model="search" placeholder="Search for...">
+          <span class="input-group-addon">
+            <i class="glyphicon glyphicon-search"></i>
+          </span>
+        </div>
+      </div>
+
     </div>
 
     <!-- 渲染笔记列表 -->
     <div class="container">
       <div class="list-group">
-        <a v-for="note in filteredNotes"
+        <a v-for="note in filteredNotes | filterBy search"
          class="list-group-item" href="#"
          :class="{active: activeNote === note}"
          @click="updateActiveNote(note)">
@@ -40,6 +50,11 @@
   import { show, filteredNotes, activeNote } from '../vuex/getters';
 
   export default {
+    data() {
+      return {
+        search: ''
+      }
+    },
     vuex: {
       getters: {
         show,
@@ -77,6 +92,10 @@
         text-align: center;
         font-size: 22px;
         padding-bottom: 8px;
+      }
+
+      .search{
+        margin-top: 20px;
       }
     }
 
