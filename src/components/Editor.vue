@@ -11,13 +11,6 @@
         class="form-control" row="3" placeholder="请输入正文"
         @input="updateNote"></textarea>
     </div>
-    <div class="form-group">
-      <h2>Preview</h2>
-      <textarea
-        v-model="currentNote.content" name="content"
-        class="form-control" row="3" placeholder="请输入正文"
-        @input="updateNote"></textarea>
-    </div>
   </div>
 </template>
 
@@ -53,7 +46,7 @@
     margin-left: 380px;
 
     .form-group{
-      height: 30%;
+      height: 50%;
     }
 
     .title{
