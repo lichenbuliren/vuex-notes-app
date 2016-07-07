@@ -29,6 +29,6 @@ npm run dev
 cnpm install -g node-sass									
 ```
 
-***window用户请用管理员模式安装**
+**\*window用户请用管理员模式安装**
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
