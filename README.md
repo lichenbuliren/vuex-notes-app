@@ -8,7 +8,7 @@
 git clone https://github.com/lichenbuliren/vuex-notes-app.git
 
 # 进入到项目根目录
-cd vux-notes-app
+cd vuex-notes-app
 
 # 安装依赖包
 npm install
