@@ -100,8 +100,8 @@
     }
 
     .container{
-      height: calc(100% - 137px);
-      max-height: calc(100% - 137px);
+      height: calc(100% - 204px);
+      max-height: calc(100% - 204px);
       overflow: auto;
       width: 100%;
       padding: 0;
