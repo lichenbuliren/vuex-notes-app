@@ -13,7 +13,7 @@ const state = {
 const mutations = {
   // 初始化 state
   INIT_STORE(state, data) {
-    state.notes = data.notes,
+    state.notes = data.notes;
     state.show = data.show;
     state.activeNote = data.activeNote;
   },
